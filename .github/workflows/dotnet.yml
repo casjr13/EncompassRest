@@ -18,7 +18,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '3.1.x'
+        dotnet-version: '3.1'
     - name: Setup nuget sources
       working-directory: ./src
       run: nuget sources add -Name Github -Source https://nuget.pkg.github.com/iteam-software/index.json -Username casjr13 -Password ${{ secrets.GPR_CASJR13_PAT }} -StorePasswordInClearText
@@ -27,7 +27,7 @@ jobs:
       run: dotnet restore
     - name: Pack with dotnet
       working-directory: ./src
-      run: dotnet pack -o ./packed -c Release /p:Version=${GITHUB_REF##*/}
+      run: dotnet pack EncompassRest -o ./packed -c Release /p:Version=${GITHUB_REF##*/}
     - name: Push with nuget
       working-directory: ./src
       run: nuget push ./packed/ -Source Github -SkipDuplicate
