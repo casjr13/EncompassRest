@@ -8,6 +8,10 @@ on:
     types:
       - created
 
+defaults:
+  run:
+    working-directory: ./src
+
 jobs:
   build:
 
@@ -19,18 +23,14 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '3.1'
-    - name: Setup nuget sources
-      working-directory: ./src
-      run: nuget sources add -Name Github -Source https://nuget.pkg.github.com/iteam-software/index.json -Username casjr13 -Password ${{ secrets.GPR_CASJR13_PAT }} -StorePasswordInClearText
+    #- name: Setup nuget sources
+    #  working-directory: ./src
+    #  run: nuget sources add -Name Github -Source https://nuget.pkg.github.com/iteam-software/index.json -Username casjr13 -Password ${{ secrets.GPR_CASJR13_PAT }} -StorePasswordInClearText
     - name: Restore Packages
-      working-directory: ./src
       run: dotnet restore
     - name: Build
-      working-directory: ./src
       run: dotnet build EncompassRest -c Release --no-restore
     - name: Pack with dotnet
-      working-directory: ./src
-      run: dotnet pack EncompassRest -o ./packed -c Release --no-build /p:Version=${GITHUB_REF##*/}
+      run: dotnet pack  EncompassRest -c Release -o ./packed --no-build /p:Version=${GITHUB_REF##*/}
     - name: Push with nuget
-      working-directory: ./src
-      run: dotnet nuget push ./packed/ -Source Github -SkipDuplicate
+      run: dotnet nuget push ./packed/*.nupkg -k ${{ secrets.GPR_CASJR13_PAT }} -s https://nuget.pkg.github.com/iteam-software/index.json 
