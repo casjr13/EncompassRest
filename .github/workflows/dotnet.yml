@@ -33,4 +33,4 @@ jobs:
       run: dotnet pack EncompassRest -o ./packed -c Release --no-build /p:Version=${GITHUB_REF##*/}
     - name: Push with nuget
       working-directory: ./src
-      run: nuget push ./packed/ -Source Github -SkipDuplicate
+      run: dotnet nuget push ./packed/ -Source Github -SkipDuplicate
