@@ -20,7 +20,7 @@ jobs:
       with:
         dotnet-version: '3.1.x'      
     - name: Setup nuget sources
-      run: nuget sources add -Name Github -Source https://nuget.pkg.github.com/iteam-software/index.json -Username casjr13 -Password ${{ secrets.FULL_ACCESS_TOKEN }} -StorePasswordInClearText
+      run: nuget sources add -Name Github -Source https://nuget.pkg.github.com/iteam-software/index.json -Username casjr13 -Password ${{ secrets.GPR_CASJR13_PAT }} -StorePasswordInClearText
     - name: Restore Packages
       run: nuget restore
     - name: Pack with dotnet
