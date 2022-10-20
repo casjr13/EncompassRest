@@ -22,7 +22,7 @@ jobs:
     - name: Setup nuget sources
       run: nuget sources add -Name Github -Source https://nuget.pkg.github.com/iteam-software/index.json -Username casjr13 -Password ${{ secrets.GPR_CASJR13_PAT }} -StorePasswordInClearText
     - name: Restore Packages
-      run: nuget restore
+      run: dotnet restore
     - name: Pack with dotnet
       run: dotnet pack -o ./packed -c Release /p:Version=${GITHUB_REF##*/}
     - name: Push with nuget
