@@ -21,7 +21,7 @@ jobs:
         dotnet-version: '3.1'
     - name: Setup nuget sources
       working-directory: ./src
-      run: nuget sources add -Name Github -Source https://nuget.pkg.github.com/iteam-software/index.json -Username casjr13 -Password ${{ secrets.GPR_CASJR13_PAT }} -StorePasswordInClearText
+      run: nuget sources add -Name Github -Source https://nuget.pkg.github.com/casjr13/index.json -Username casjr13 -Password ${{ secrets.GPR_CASJR13_PAT }} -StorePasswordInClearText
     - name: Restore Packages
       working-directory: ./src
       run: dotnet restore
