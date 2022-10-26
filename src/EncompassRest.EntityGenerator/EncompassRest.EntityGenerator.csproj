@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Configurations>Debug;Release;CI</Configurations>
     <SignAssembly>true</SignAssembly>
